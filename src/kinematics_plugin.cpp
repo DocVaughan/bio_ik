@@ -471,7 +471,8 @@ namespace bio_ik_kinematics_plugin {
   
         virtual bool
         searchPositionIK(const std::vector<geometry_msgs::Pose> &ik_poses,
-                         const std::vector<double> &ik_seed_state, double timeout,
+                         const std::vector<double> &ik_seed_state, 
+                         double timeout,
                          const std::vector<double> &consistency_limits,
                          std::vector<double> &solution,
                          const IKCallbackFn &solution_callback,
@@ -479,14 +480,16 @@ namespace bio_ik_kinematics_plugin {
                          const kinematics::KinematicsQueryOptions &options =
                              kinematics::KinematicsQueryOptions(),
                          const moveit::core::RobotState *context_state = NULL) const {
+           
             double t0 = ros::WallTime::now().toSec();
     
             // timeout = 0.1;
     
             // LOG("a");
     
-            if (enable_profiler)
+            if (enable_profiler) {
                 Profiler::start();
+            }
     
             auto *bio_ik_options = toBioIKKinematicsQueryOptions(&options);
     
